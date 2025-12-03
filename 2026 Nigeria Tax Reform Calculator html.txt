@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nigerian Tax Calculator 2026</title>
+<style>
+    body {
+        font-family: Inter, Roboto, Arial, sans-serif;
+        background:#f6f8f7;
+        margin:0;
+        padding:0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        background:white;
+        padding:22px;
+        border-radius:12px;
+        box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+        text-align:center;
+        color:#008751;
+        font-size: 22px;
+        font-weight:700;
+        margin-bottom:15px;
+    }
+
+    .toggle-area {
+        text-align:center;
+        margin-bottom:18px;
+        font-size:15px;
+    }
+
+    .tabs {
+        display:flex;
+        justify-content:space-between;
+        margin-bottom:20px;
+    }
+
+    .tab {
+        flex:1;
+        padding:12px;
+        text-align:center;
+        cursor:pointer;
+        background:#e8eee9;
+        border-radius:8px;
+        margin-right:8px;
+        font-weight:600;
+        color:#008751;
+    }
+    .tab.active {
+        background:#008751;
+        color:white;
+    }
+    .tab:last-child {
+        margin-right:0;
+    }
+
+    .section {
+        display:none;
+    }
+    .section.active {
+        display:block;
+    }
+
+    label { font-weight:600; display:block; margin:8px 0 4px; }
+    input[type="number"] {
+        width:100%;
+        padding:10px;
+        font-size:15px;
+        border:1px solid #ccc;
+        border-radius:6px;
+    }
+
+    .checkbox-line {
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-top:8px;
+        font-size:14px;
+    }
+
+    .results-box {
+        margin-top:20px;
+        background:#f1f7f1;
+        padding:18px;
+        border-radius:10px;
+    }
+
+    .line { 
+        display:flex; 
+        justify-content:space-between; 
+        margin:6px 0; 
+        font-size:15px; 
+    }
+
+    .tax { color:red; font-weight:700; font-size:18px; }
+    .takehome { color:#008751; font-weight:700; font-size:18px; }
+
+    .cta-btn {
+        margin-top:20px;
+        display:block;
+        width:100%;
+        text-align:center;
+        background:#ffb300;
+        padding:15px;
+        border-radius:8px;
+        font-size:17px;
+        font-weight:700;
+        text-decoration:none;
+        color:black;
+        animation:pulse 1.7s infinite;
+    }
+    @keyframes pulse {
+        0% { transform:scale(1); }
+        50% { transform:scale(1.03); }
+        100% { transform:scale(1); }
+    }
+
+    .glossary {
+        margin-top:25px;
+        background:white;
+        padding:15px;
+        border-radius:8px;
+        border:1px solid #ddd;
+    }
+    .glossary dt { font-weight:700; margin-top:10px; }
+    .glossary dd { margin-left:0; margin-bottom:5px; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Don’t Get Caught Off-Guard: New Nigerian Tax Rules Start Soon</h1>
+
+<div class="toggle-area">
+    <label><strong>View Results In:</strong></label>
+    <select id="modeToggle">
+        <option value="annual">Annual</option>
+        <option value="monthly">Monthly</option>
+    </select>
+</div>
+
+<div class="tabs">
+    <div class="tab active" data-tab="salary">Salary Earner</div>
+    <div class="tab" data-tab="business">Business Owner</div>
+</div>
+
+<!-- SALARY TAB -->
+<div id="salary" class="section active">
+    <label>Gross Income</label>
+    <input type="number" id="salaryGross" placeholder="Enter Gross Income">
+
+    <label>Annual Rent (for Rent Relief)</label>
+    <input type="number" id="salaryRent" placeholder="Enter Annual Rent">
+
+    <div class="checkbox-line">
+        <input type="checkbox" id="chkPension" checked>
+        <span>Pension (8%)</span>
+    </div>
+    <div class="checkbox-line">
+        <input type="checkbox" id="chkNHF" checked>
+        <span>NHF (2.5%)</span>
+    </div>
+    <div class="checkbox-line">
+        <input type="checkbox" id="chkNHIS" checked>
+        <span>NHIS (5%)</span>
+    </div>
+</div>
+
+<!-- BUSINESS TAB -->
+<div id="business" class="section">
+    <label>Annual Turnover</label>
+    <input type="number" id="bizTurnover" placeholder="Enter Annual Turnover">
+    
+    <label>Total Annual Expenses</label>
+    <input type="number" id="bizExpenses" placeholder="Enter Allowable Expenses">
+</div>
+
+<div class="results-box">
+    <div class="line"><span>Gross Income:</span> <span id="rGross">₦0</span></div>
+    <div class="line"><span>Total Reliefs:</span> <span id="rReliefs">₦0</span></div>
+    <div class="line"><span>Taxable Income:</span> <span id="rTaxable">₦0</span></div>
+    <div class="line tax"><span>TAX PAYABLE:</span> <span id="rTax">₦0</span></div>
+    <div class="line takehome"><span>TAKE HOME PAY:</span> <span id="rTakehome">₦0</span></div>
+</div>
+
+<a href="https://selar.com/m4k6pe19d7" class="cta-btn">⚠️ Pay Less Tax! Get the 2026 Strategy Guide</a>
+
+<div class="glossary">
+    <h3>Understanding Your Payslip</h3>
+    <dl>
+        <dt>PAYE</dt><dd>Pay As You Earn tax.</dd>
+        <dt>NHF</dt><dd>National Housing Fund (2.5%).</dd>
+        <dt>NHIS</dt><dd>National Health Insurance Scheme (5%).</dd>
+        <dt>Pension</dt><dd>8% contribution from employee.</dd>
+        <dt>Rent Relief</dt><dd>20% of rent, capped at ₦500,000 yearly.</dd>
+    </dl>
+</div>
+
+</div> <!-- END CONTAINER -->
+
+<script>
+/* ---------- TAB SWITCH ---------- */
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+        document.getElementById(tab.dataset.tab).classList.add("active");
+
+        calculate();
+    });
+});
+
+/* ---------- CALCULATION LOGIC ---------- */
+function calcTax(annualTaxable) {
+    let t = annualTaxable;
+    let tax = 0;
+
+    const bands = [
+        {limit:800000, rate:0},
+        {limit:2200000, rate:0.15},
+        {limit:9000000, rate:0.18},
+        {limit:13000000, rate:0.21},
+        {limit:25000000, rate:0.23},
+        {limit:Infinity, rate:0.25}
+    ];
+
+    for (const b of bands) {
+        if (t <= 0) break;
+        let use = Math.min(t, b.limit);
+        tax += use * b.rate;
+        t -= use;
+    }
+    return tax;
+}
+
+function calculate() {
+    const mode = document.getElementById("modeToggle").value;
+    let gross = 0, reliefs = 0, taxable = 0;
+
+    /* ----- Salary Earner ----- */
+    if (document.getElementById("salary").classList.contains("active")) {
+        let g = Number(document.getElementById("salaryGross").value) || 0;
+        let rent = Number(document.getElementById("salaryRent").value) || 0;
+
+        gross = g;
+
+        let pension = document.getElementById("chkPension").checked ? g * 0.08 : 0;
+        let nhf = document.getElementById("chkNHF").checked ? g * 0.025 : 0;
+        let nhis = document.getElementById("chkNHIS").checked ? g * 0.05 : 0;
+
+        let rentRelief = Math.min(rent * 0.20, 500000);
+
+        reliefs = pension + nhf + nhis + rentRelief;
+        taxable = g - reliefs;
+    }
+
+    /* ----- Business Owner ----- */
+    else {
+        let t = Number(document.getElementById("bizTurnover").value) || 0;
+        let e = Number(document.getElementById("bizExpenses").value) || 0;
+        gross = t;
+        taxable = t - e;
+        reliefs = e; // For display
+    }
+
+    if (taxable < 0) taxable = 0;
+
+    let annualTax = calcTax(taxable);
+    let takeHome = gross - annualTax;
+
+    if (mode === "monthly") {
+        gross /= 12;
+        reliefs /= 12;
+        taxable /= 12;
+        annualTax /= 12;
+        takeHome /= 12;
+    }
+
+    document.getElementById("rGross").innerHTML = "₦" + gross.toLocaleString();
+    document.getElementById("rReliefs").innerHTML = "₦" + reliefs.toLocaleString();
+    document.getElementById("rTaxable").innerHTML = "₦" + taxable.toLocaleString();
+    document.getElementById("rTax").innerHTML = "₦" + annualTax.toLocaleString();
+    document.getElementById("rTakehome").innerHTML = "₦" + takeHome.toLocaleString();
+}
+
+/* ---------- LIVE UPDATES ---------- */
+document.querySelectorAll("input, select").forEach(el => {
+    el.addEventListener("input", calculate);
+});
+
+calculate();
+</script>
+
+</body>
+</html>
